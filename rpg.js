@@ -63,19 +63,20 @@ function battle(currentState) {
   }
 
   const battleInitializationState = updateStateObj();
-  console.log(battleInitializationState);
   // termination case
 
-
   // conditional base case
-  // if (currentStateBattleStart)
-  // if either balrog or galdalf's currentstate.Gandalf.health <= 0 then the fight is over
+  if (battleInitializationState.Gandalf.health <= 0) {
+    console.log("Oh no, Gandalf, you are dead!");
+  }
 
   // recursion
   // fighter1 attacks first, and so fighter2 gets their stats reduced first
   // the reduction of fighter2's stats depends on fighter1's strength/magic
   // const currentState
-  const firstAttack = changeState("health", "magic")(-10, -10);
+  const castMagicAttack = changeState("health", "magic")(-(currentState.Gandalf.magic * .5), -10);
+  const applyMagicAttack = updateStateObj(castMagicAttack, balrog);
+  console.log(updateStateObj().Balrog.health);
 
   // return battle();
   return;
