@@ -49,8 +49,8 @@ const gandalf = "Gandalf";
 const newWizard = addCharacter(defaultCharacterObj)(gandalf); // Set it up
 const newCharacterState = updateStateObj(newWizard); // Push it to state
 
-const activateGandalfIntel = changeState("health", "magic")(105, 54); // Set it up
-const newCharacterState2 = updateStateObj(activateGandalfIntel, gandalf); // Push it to state
+const activateGandalfProps = changeState("health", "magic")(105, 54); // Set it up
+const newCharacterState2 = updateStateObj(activateGandalfProps, gandalf); // Push it to state
 
 // Grab current state
 const currentState1 = updateStateObj();
