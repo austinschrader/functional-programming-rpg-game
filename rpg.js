@@ -46,8 +46,11 @@ const newCharacterState = updateStateObj(newWizard); // Push it to state
 const activateGandalfIntel = changeState("intelligence", "magic")(105, 54); // Set it up
 const newCharacterState2 = updateStateObj(activateGandalfIntel, gandalf); // Push it to state
 
-// Update Wizard with Multiple Props
-const deathOfGandalf = changeState("intelligence", "magic")(-105, -54);
+// Grab current state
+console.log(`this is the intelligence level ${updateStateObj().Gandalf.intelligence}`);
+
+// Update Wizard with Multiple Props - Target nested storeObj value
+const deathOfGandalf = changeState("intelligence", "magic")(-(updateStateObj().Gandalf.intelligence), -(updateStateObj().Gandalf.magic));
 const newCharacterState3 = updateStateObj(deathOfGandalf, gandalf);
 
 console.log("state obj", newCharacterState);
@@ -55,9 +58,6 @@ console.log("state obj", newCharacterState2);
 console.log("state obj", newCharacterState3);
 
 // Create Warrior
-
-
-
 
 
 
