@@ -23,7 +23,7 @@ const changeState = (prop, prop2) => {
       [characterName]: {
         ...state[characterName],
         [prop]: (state[characterName][prop] || 0) + value,
-        [prop2]: (state[characterName][prop] || 0) + value2,
+        [prop2]: (state[characterName][prop2] || 0) + value2
       }
 
     })
@@ -42,12 +42,17 @@ const defaultCharacterObj = {
 const gandalf = "Gandalf";
 const newWizard = addCharacter(defaultCharacterObj)(gandalf); // Set it up
 const newCharacterState = updateStateObj(newWizard); // Push it to state
-const activateGandalfIntel = changeState("intelligence")(100); // Set it up
+
+const activateGandalfIntel = changeState("intelligence", "magic")(105, 54); // Set it up
 const newCharacterState2 = updateStateObj(activateGandalfIntel, gandalf); // Push it to state
 
 // Update Wizard with Multiple Props
-const deathOfGandalf = changeState("intelligence")(0)("magic")("0")("name")("Former-Gandalf");
+const deathOfGandalf = changeState("intelligence", "magic")(-105, -54);
 const newCharacterState3 = updateStateObj(deathOfGandalf, gandalf);
+
+console.log("state obj", newCharacterState);
+console.log("state obj", newCharacterState2);
+console.log("state obj", newCharacterState3);
 
 // Create Warrior
 
