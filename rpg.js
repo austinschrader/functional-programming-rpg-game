@@ -16,11 +16,16 @@ const addCharacter = (defaultCharacterObj) => {
   }
 }
 
-const changeState = (prop) => {
-  return (value) => {
+const changeState = (prop, prop2) => {
+  return (value, value2) => {
     return (state, characterName) => ({
       ...state,
-      [characterName]: { ...state[characterName], [prop]: (state[characterName][prop] || 0) + value }
+      [characterName]: {
+        ...state[characterName],
+        [prop]: (state[characterName][prop] || 0) + value,
+        [prop2]: (state[characterName][prop] || 0) + value2,
+      }
+
     })
   }
 }
@@ -32,14 +37,22 @@ const defaultCharacterObj = {
   magic: 0,
   name: ""
 };
-const characterName = "Gandalf";
-const wizard1 = addCharacter(defaultCharacterObj)(characterName);
 
-const newCharacterState = updateStateObj(wizard1);
-console.log("state obj", newCharacterState);
+// Create Wizard
+const gandalf = "Gandalf";
+const newWizard = addCharacter(defaultCharacterObj)(gandalf); // Set it up
+const newCharacterState = updateStateObj(newWizard); // Push it to state
+const activateGandalfIntel = changeState("intelligence")(100); // Set it up
+const newCharacterState2 = updateStateObj(activateGandalfIntel, gandalf); // Push it to state
 
-const activateGandalfIntel = changeState("intelligence")(100);
-const newCharacterState2 = updateStateObj(activateGandalfIntel, "Gandalf");
+// Update Wizard with Multiple Props
+const deathOfGandalf = changeState("intelligence")(0)("magic")("0")("name")("Former-Gandalf");
+const newCharacterState3 = updateStateObj(deathOfGandalf, gandalf);
 
-console.log("state obj", newCharacterState2);
+// Create Warrior
+
+
+
+
+
 
