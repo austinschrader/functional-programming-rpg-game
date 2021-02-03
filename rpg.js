@@ -40,7 +40,7 @@ const defaultCharacterObj = {
 
 const defaultBalrogObj = {
   health: 100,
-  magic: 100,
+  strength: 100,
   name: "Balrog"
 };
 
@@ -75,13 +75,15 @@ function battle(currentState) {
   } else {
     // recursion
 
-    const castMagicAttack = changeState("health")(-(Math.floor(currentState.Gandalf.magic * Math.random())));
+    const castMagicAttack = changeState("health", "strength")(-(Math.floor(currentState.Gandalf.magic * Math.random())), 0);
     const applyMagicAttack = updateStateObj(castMagicAttack, balrog);
     console.log(`Balrog's health remaining: ${updateStateObj().Balrog.health}!`);
 
-    // const castMagicAttack = changeState("health")(-(currentState.Gandalf.magic * .5));
-    // const applyMagicAttack = updateStateObj(castMagicAttack, balrog);
-    // console.log(`Balrog's health remaining: ${updateStateObj().Balrog.health}!`);
+    console.log(roundInitializationState)
+
+    const physicalAttack = changeState("health", "magic")(-(Math.floor(roundInitializationState.Balrog.strength * Math.random())), 0);
+    const applyPhysicalAttack = updateStateObj(physicalAttack, gandalf);
+    console.log(`Gandolf's health remaining: ${updateStateObj().Gandalf.health}!`);
 
     const endOfRoundState = updateStateObj();
     return battle(endOfRoundState);
