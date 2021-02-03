@@ -68,7 +68,7 @@ console.log("state obj", newCharacterState3);
 // Battle starts
 // if newcharacter state 2 is less than or equal to current character state; && magic/intelligence depleted
 
-function battle(fighter1, fighter2) {
+function battle(fighter1) {
   const newBalrog = addCharacter(defaultBalrogObj)("Balrog");
   const newBalrogState = updateStateObj(newBalrog);
   // termination case
@@ -81,6 +81,6 @@ function battle(fighter1, fighter2) {
   return battle();
 }
 
-battle(gandalf, Balrog);
+battle(currentState.Gandalf);
 
 
