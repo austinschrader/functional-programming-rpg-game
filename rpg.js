@@ -72,15 +72,15 @@ function battle(currentState) {
   } else if (roundInitializationState.Balrog.health <= 0) {
     console.log("Victory! Balrog has been defeated!");
     return;
+  } else {
+    // recursion
+    const castMagicAttack = changeState("health", "magic")(-(currentState.Gandalf.magic * .5), -10);
+    const applyMagicAttack = updateStateObj(castMagicAttack, balrog);
+    console.log(`Balrog's health remaining: ${updateStateObj().Balrog.health}!`);
+
+    const endOfRoundState = updateStateObj();
+    return battle(endOfRoundState);
   }
-
-  // recursion
-  const castMagicAttack = changeState("health", "magic")(-(currentState.Gandalf.magic * .5), -10);
-  const applyMagicAttack = updateStateObj(castMagicAttack, balrog);
-  console.log(`Balrog's health remaining: ${updateStateObj().Balrog.health}!`);
-
-  const endOfRoundState = updateStateObj();
-  return battle(endOfRoundState);
 }
 
 battle(currentState1);
