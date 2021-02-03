@@ -1,4 +1,4 @@
-const storeState = () => {
+const storeState = (initialState) => {
   let currentState = initialState;
   return (stateChangeFunction = state => state) => {
     const newState = stateChangeFunction(currentState);
@@ -18,4 +18,8 @@ const changeState = (prop) => {
   }
 }
 
-const 
+const character = {
+  name: "",
+  attribute1: 0,
+  atrribute2 = 0
+}
