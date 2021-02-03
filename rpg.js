@@ -35,7 +35,7 @@ const updateStateObj = storeState();
 const defaultCharacterObj = {
   intelligence: 0,
   magic: 0,
-  name: ""
+  name: "Gandalf"
 };
 
 const defaultBalrogObj = {
@@ -69,16 +69,26 @@ console.log("state obj", newCharacterState3);
 // if newcharacter state 2 is less than or equal to current character state; && magic/intelligence depleted
 
 function battle(fighter1) {
-  const newBalrog = addCharacter(defaultBalrogObj)("Balrog");
+  const balrog = "Balrog";
+  const newBalrog = addCharacter(defaultBalrogObj)(balrog);
   const newBalrogState = updateStateObj(newBalrog);
+  console.log(newBalrogState);
   // termination case
 
+
   // conditional base case
+  // if either balrog or galdalf's currentstate.Gandalf.intelligence <= 0 then the fight is over
+
+  // recursion
+
 
   // fighter1 attacks first, and so fighter2 gets their stats reduced first
   // the reduction of fighter2's stats depends on fighter1's strength/magic
   const firstAttack = changeState("intelligence", "magic")(-10, -10);
-  return battle();
+  
+  console.log(currentState.Gandalf, currentState.Balrog);
+  // return battle();
+  return;
 }
 
 battle(currentState.Gandalf);
