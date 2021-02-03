@@ -74,7 +74,7 @@ function battle(currentState) {
     return;
   } else {
     // recursion
-    const castMagicAttack = changeState("health", "magic")(-(currentState.Gandalf.magic * .5), -10);
+    const castMagicAttack = changeState("health")(-(currentState.Gandalf.magic * .5));
     const applyMagicAttack = updateStateObj(castMagicAttack, balrog);
     console.log(`Balrog's health remaining: ${updateStateObj().Balrog.health}!`);
 
