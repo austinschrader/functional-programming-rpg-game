@@ -38,7 +38,13 @@ const defaultCharacterObj = {
   name: ""
 };
 
-// Create Wizard
+const defaultBalrogObj = {
+  intelligence: 100,
+  magic: 100,
+  name: "Balrog"
+};
+
+// Create Gandalf Wizard
 const gandalf = "Gandalf";
 const newWizard = addCharacter(defaultCharacterObj)(gandalf); // Set it up
 const newCharacterState = updateStateObj(newWizard); // Push it to state
@@ -47,7 +53,8 @@ const activateGandalfIntel = changeState("intelligence", "magic")(105, 54); // S
 const newCharacterState2 = updateStateObj(activateGandalfIntel, gandalf); // Push it to state
 
 // Grab current state
-console.log(`this is the intelligence level way #1: ${updateStateObj().Gandalf.intelligence}`);
+const currentState = updateStateObj();
+console.log(`this is the intelligence level way #1: ${currentState.Gandalf.intelligence}`);
 console.log(`this is the intelligence level way #2: ${newCharacterState2.Gandalf.intelligence}`);
 
 // Update Wizard with Multiple Props - Target nested storeObj value
@@ -58,7 +65,22 @@ console.log("state obj", newCharacterState);
 console.log("state obj", newCharacterState2);
 console.log("state obj", newCharacterState3);
 
-// Create Warrior
+// Battle starts
+// if newcharacter state 2 is less than or equal to current character state; && magic/intelligence depleted
 
+function battle(fighter1, fighter2) {
+  const newBalrog = addCharacter(defaultBalrogObj)("Balrog");
+  const newBalrogState = updateStateObj(newBalrog);
+  // termination case
+
+  // conditional base case
+
+  // fighter1 attacks first, and so fighter2 gets their stats reduced first
+  // the reduction of fighter2's stats depends on fighter1's strength/magic
+  const firstAttack = changeState("intelligence", "magic")(-10, -10);
+  return battle();
+}
+
+battle(gandalf, Balrog);
 
 
