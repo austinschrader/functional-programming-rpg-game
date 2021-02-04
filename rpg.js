@@ -47,13 +47,16 @@ const defaultBalrogObj = {
   name: "Balrog"
 };
 
-// Create Gandalf Wizard
-const gandalf = "Gandalf";
-const newWizard = addCharacter(defaultCharacterObj)(gandalf); // Set it up
-const newCharacterState = updateStateObj(newWizard); // Push it to state
+function setDefault() {
+  // Create Gandalf Wizard
+  const gandalf = "Gandalf";
+  const newWizard = addCharacter(defaultCharacterObj)(gandalf); // Set it up
+  const newCharacterState = updateStateObj(newWizard); // Push it to state
 
-// Grab current state
-const currentState1 = updateStateObj();
+  return newCharacterState;
+}
+
+console.log(setDefault());
 
 // Battle
 function battle(currentState) {
@@ -64,6 +67,7 @@ function battle(currentState) {
   }
 
   const roundInitializationState = updateStateObj();
+  console.log(currentState);
   // termination case
 
   // conditional base case
@@ -79,8 +83,6 @@ function battle(currentState) {
     const applyMagicAttack = updateStateObj(castMagicAttack, balrog);
     console.log(`Balrog's health remaining: ${updateStateObj().Balrog.health}!`);
 
-    console.log(roundInitializationState)
-
     const physicalAttack = changeState("health", "magic")(-(Math.floor(roundInitializationState.Balrog.strength * Math.random())), 0);
     const applyPhysicalAttack = updateStateObj(physicalAttack, gandalf);
     console.log(`Gandalf's health remaining: ${updateStateObj().Gandalf.health}!`);
@@ -90,6 +92,9 @@ function battle(currentState) {
   }
 }
 
-battle(currentState1);
+// 2 new functions
+// level up function, and return to default function (maybe just return newCharacterState line 53)
+
+// battle(currentState1);
 
 
