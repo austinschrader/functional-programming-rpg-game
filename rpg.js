@@ -32,10 +32,13 @@ const changeState = (prop, prop2) => {
 
 const updateStateObj = storeState();
 
+
+// Character Setup
 const defaultCharacterObj = {
-  health: 0,
-  magic: 0,
-  name: "Gandalf"
+  health: 105,
+  magic: 54,
+  name: "Gandalf",
+  hasStaff: false
 };
 
 const defaultBalrogObj = {
@@ -49,12 +52,13 @@ const gandalf = "Gandalf";
 const newWizard = addCharacter(defaultCharacterObj)(gandalf); // Set it up
 const newCharacterState = updateStateObj(newWizard); // Push it to state
 
-const activateGandalfProps = changeState("health", "magic")(105, 54); // Set it up
-const newCharacterState2 = updateStateObj(activateGandalfProps, gandalf); // Push it to state
+// const activateGandalfProps = changeState("health", "magic")(105, 54); // Set it up
+// const newCharacterState2 = updateStateObj(activateGandalfProps, gandalf); // Push it to state
 
 // Grab current state
 const currentState1 = updateStateObj();
 
+// Battle
 function battle(currentState) {
   if (!currentState.Balrog) {
     balrog = "Balrog";
@@ -74,7 +78,6 @@ function battle(currentState) {
     return;
   } else {
     // recursion
-
     const castMagicAttack = changeState("health", "strength")(-(Math.floor(currentState.Gandalf.magic * Math.random())), 0);
     const applyMagicAttack = updateStateObj(castMagicAttack, balrog);
     console.log(`Balrog's health remaining: ${updateStateObj().Balrog.health}!`);
@@ -83,7 +86,7 @@ function battle(currentState) {
 
     const physicalAttack = changeState("health", "magic")(-(Math.floor(roundInitializationState.Balrog.strength * Math.random())), 0);
     const applyPhysicalAttack = updateStateObj(physicalAttack, gandalf);
-    console.log(`Gandolf's health remaining: ${updateStateObj().Gandalf.health}!`);
+    console.log(`Gandalf's health remaining: ${updateStateObj().Gandalf.health}!`);
 
     const endOfRoundState = updateStateObj();
     return battle(endOfRoundState);
