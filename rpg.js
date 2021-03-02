@@ -1,17 +1,17 @@
 const storeState = (initialState = {}) => {
   let currentState = initialState;
-  return (stateChangeFunction = state => state, characterName) => {
-    const newState = stateChangeFunction(currentState, characterName);
+  return (stateChangeFunction = state => state, characterNameObj) => {
+    const newState = stateChangeFunction(currentState, characterNameObj);
     currentState = { ...newState };
     return newState;
   }
 }
 
 const addCharacter = (defaultCharacterObj) => {
-  return (characterName) => {
+  return (characterNameObj) => {
     return (state) => ({
       ...state,
-      [characterName]: defaultCharacterObj
+      [characterNameObj]: defaultCharacterObj
     })
   }
 }
@@ -38,6 +38,7 @@ const defaultCharacterObj = {
   health: 105,
   magic: 54,
   name: "Gandalf",
+  level: 1,
   hasStaff: false
 };
 
@@ -47,16 +48,16 @@ const defaultBalrogObj = {
   name: "Balrog"
 };
 
-function setDefault() {
-  // Create Gandalf Wizard
-  const gandalf = "Gandalf";
-  const newWizard = addCharacter(defaultCharacterObj)(gandalf); // Set it up
-  const newCharacterState = updateStateObj(newWizard); // Push it to state
+// function setDefault() {
+// Create Gandalf Wizard
+const gandalf = "Gandalf";
+const newWizard = addCharacter(defaultCharacterObj)(gandalf); // Set it up
+const newCharacterState = updateStateObj(newWizard); // Push it to state
 
-  return newCharacterState;
-}
+// return newCharacterState;
+// }
 
-console.log(setDefault());
+// console.log(setDefault());
 
 // Battle
 function battle(currentState) {
@@ -67,15 +68,17 @@ function battle(currentState) {
   }
 
   const roundInitializationState = updateStateObj();
-  console.log(currentState);
+  // console.log(currentState);
   // termination case
 
   // conditional base case
   if (roundInitializationState.Gandalf.health <= 0) {
     console.log("Oh no, Gandalf, you are dead!");
-    return;
+    // return setDefault();
   } else if (roundInitializationState.Balrog.health <= 0) {
     console.log("Victory! Balrog has been defeated!");
+    const levelUp = changeState("health", "magic")(10, 20);
+    const updateState = updateStateObj(levelUp);
     return;
   } else {
     // recursion
@@ -84,10 +87,14 @@ function battle(currentState) {
     console.log(`Balrog's health remaining: ${updateStateObj().Balrog.health}!`);
 
     const physicalAttack = changeState("health", "magic")(-(Math.floor(roundInitializationState.Balrog.strength * Math.random())), 0);
+    console.log("no error");
+    // const applyPhysicalAttack = updateStateObj(physicalAttack, currentState.Gandalf.health);
     const applyPhysicalAttack = updateStateObj(physicalAttack, gandalf);
+    console.log("error");
     console.log(`Gandalf's health remaining: ${updateStateObj().Gandalf.health}!`);
 
     const endOfRoundState = updateStateObj();
+
     return battle(endOfRoundState);
   }
 }
@@ -95,6 +102,7 @@ function battle(currentState) {
 // 2 new functions
 // level up function, and return to default function (maybe just return newCharacterState line 53)
 
-// battle(currentState1);
+battle(updateStateObj());
+console.log(updateStateObj());
 
 
